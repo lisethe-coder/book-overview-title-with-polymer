@@ -1,0 +1,50 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link rel="import" href="../iron-image/iron-image.html">
+
+<!-- Element that provides a brief overview of a book title -->
+<dom-module id="book-overview">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>{{data.title}}</h2>
+    <iron-ajax
+      auto
+      url="https://d1re4mvb3lawey.cloudfront.net/pg1017/index.json"
+      handle-as="json"
+      last-response="{{data}}"></iron-ajax>
+       <div>
+             <iron-image alt="The Soul of Man under Socialism" src="/bibliotech-book-cover.jpg"></iron-image>
+             <p><strong>ISBN: </strong> <span class="text-right">{{data.isbn}}</span></p>
+              <p><strong>Authors: </strong> <span >{{data.contributors}}</span></p>
+              <p><strong>Date: </strong> <span class="text-right">{{data.date}}</span></p>
+      </div>
+  </template>
+
+  <script>
+    /**
+     * `book-overview`
+     * provides a brief description of a book title
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class BookOverview extends Polymer.Element {
+      static get is() { return 'book-overview'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'book-overview'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(BookOverview.is, BookOverview);
+  </script>
+</dom-module>
